@@ -11,10 +11,16 @@
 <body>
     <div class="container">
         <h1>Color Palatte Generator</h1>
+        <div class="gen-save">
         <button id="generate-btn">
             <i class="fas fa-sync-alt"></i>
             Generate Palette
         </button>
+        <button id="save-btn">
+            <i class="fas fa-save"></i>
+            Save Palette
+        </button>
+        </div>
 
         <div class="palette-container">
             <!-- COLOR BOX 1 -->
@@ -57,6 +63,14 @@
                     <i class="far fa-copy copy-btn" title="Copy to Clipboard"></i>
                 </div>
               </div>
+        </div>
+            
+        <div class="saved-palettes-container">
+            <hr>
+            <h2>Saved Palettes</h2>
+            <div id="saved-palettes">
+                <!-- SAVED PALETTES -->
+            </div>
         </div>
     </div>
 

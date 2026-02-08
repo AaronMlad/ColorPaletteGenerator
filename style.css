@@ -93,6 +93,10 @@ h1::after{
     }
 }
 
+.gen-save{
+    display: flex;
+    justify-content: space-between;
+}
 #generate-btn{
     background: linear-gradient(45deg, #F63049, #111F35);
     color: white;
@@ -105,13 +109,30 @@ h1::after{
     font-size: 1rem;
     position: relative;
 }
-
+#save-btn{
+    background: linear-gradient(45deg, #30f65b, #113521);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    position: relative;
+}
 #generate-btn:hover{
     translate: 0 -2px;
     box-shadow: 0 6px 10px rgba(71, 25, 25, 0.3);
 }
-
 #generate-btn:active{
+    translate: 0;
+}
+#save-btn:hover{
+    translate: 0 -2px;
+    box-shadow: 0 6px 10px rgba(71, 25, 25, 0.3);
+}
+#save-btn:active{
     translate: 0;
 }
 
@@ -165,4 +186,21 @@ h1::after{
     .palette-container{
         grid-template-columns: repeat(auto-fit,minmax(100px, 1fr));
     }
+}
+
+hr{
+    position: relative;
+    margin-top: 20px;
+    content:"";
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 5px;
+    background:linear-gradient(to right, red, orange 20%, yellow 40%, green 60%, blue 80%, red);
+    background-size: 200%;
+    border: none;
+    border-radius: 0;
+    animation: gradientAnimation 5s linear infinite;
+    margin-bottom: 10px;
 }
