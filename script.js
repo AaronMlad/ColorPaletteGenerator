@@ -3,6 +3,7 @@ const generateBtn = document.getElementById("generate-btn");
 const paletteContainer = document.querySelector(".palette-container");
 const saveBtn = document.getElementById("save-btn");
 const savedPalettesContainer = document.getElementById("saved-palettes");
+document.addEventListener('DOMContentLoaded', generatePalette); // Generate a random palette every time the page loads
 
 generateBtn.addEventListener("click", generatePalette);
 saveBtn.addEventListener("click", savePalette);
@@ -58,23 +59,40 @@ function showCopySuccess(element){
 }
 
 function generatePalette() {
-    const colors = [];
-    for (let i = 0; i < 5; i++) {
-        colors.push(generateRandomColor());
+    const colors = new Set();
+    
+    // Pick ONE random starting color
+    const startHue = Math.floor(Math.random() * 360);
+    
+    // Generate 5 colors that are RELATED but not identical
+    while (colors.size < 5) {
+        // Colors within 90° of startHue (±45°)
+        const hue = (startHue + Math.random() * 90 - 45) % 360;
+        
+        // Keep colors vibrant and visible
+        const saturation = 60 + Math.random() * 30; 
+        const lightness = 45 + Math.random() * 25;  
+        colors.add(hslToHex(hue, saturation, lightness));
     }
-
-    updatePaletteDisplay(colors);
+    
+    updatePaletteDisplay(Array.from(colors));
 }
 
-function generateRandomColor(){
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-
-    for(let i = 0; i < 6; i++){
-        color += letters[Math.floor(Math.random() * 16)]; // generate number from 0 - 15
-    }
-
-    return color;
+function hslToHex(h, s, l) {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    
+    const f = (n) => {
+        const k = (n + h * 6) % 6;
+        return l - s * Math.min(l, 1 - l) * Math.max(0, Math.min(k, 4 - k, 1));
+    };
+    
+    const r = Math.round(f(5) * 255);
+    const g = Math.round(f(3) * 255);
+    const b = Math.round(f(1) * 255);
+    
+    return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
 function updatePaletteDisplay(colors){
